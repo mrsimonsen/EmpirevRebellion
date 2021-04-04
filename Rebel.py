@@ -72,7 +72,7 @@ class Rebel():
 	def fill_deck(self):
 		print("\tYou're out of resource cards! Shuffeling your discard pile into your deck.")
 		self.hand = self.discard[:]
-		self.discard = []
+		self.discard.clear()
 		shuffle(self.hand)
 		for card in self.hand:
 			card.status = True
@@ -298,4 +298,83 @@ class Rebel():
 		print(f"\tYour current resource value is {self.value}")
 
 	def chewbacca(self):
+		all_exhausted = True
+		for card in Empire.hand:
+			if card.status:
+				all_exhausted = False
+		if len(Empire.hand) == 0 or all_exhausted:
+			print("Your opponent doesn't have any resources left to exhaust!")
+		else:
+			num = ("1st","2nd")
+			for n in num:
+				selecting = True:
+				while selecting:
+					print(f"\tChoose the {n} opponent resource to exhaust:")
+					list_hand(Empire.hand)
+					i = get_num("Which opponent resource should be exhausted?", len(Empire.hand))
+					card = Empire.hand[i]
+					if card.staus:
+						card.status = False
+						print(f"Opponent's \"{card.name}\" has been exhausted.")
+						selecting = False
+					else:
+						print(f"\t\"{card.name}\" is already exhausted!")
+				choice = 0
+				while choice not in ("Y","N"):
+					choice = input("\tWould you like to exhaust another opponent resource? (Y)es/(N)o\n").title()
+				if choice == "Y":
+					continue
+				else:
+					break
+	def lando(self):
+		selecting = True
+		selection = []
+		while selecting:
+			print("\tChoose a resource to discard:")
+			list_hand(self.hand)
+			i = get_num("Which resource should be discarded?", len(self.hand))
+			card = self.hand[i]
+			selection.append(card)
+			self.hand.remove(card)
+			again = 0
+			while again not in ("Y","N"):
+				again = input("\tWould you like to discard another resource? (Y)es/(N)o\n").title()
+			if again == "N":
+				selecting = False
+			else:
+				if len(self.hand) > 0
+					print(f"\tCurrently discarding {len(selection)} resources.")
+				else:
+					print("\tYou don't have any resources left!")
+					selecting = False
+		num = len(selection)
+		print(f"\tDiscarded {num} resources and now playing {num} resources.")
+		for card in selection:
+			self.discard.append(card)
+		for i in range(num):
+			self.play_a_card()
 
+	def luke(self):
+		choice = 0
+		while choice not in ("B","Y","O"):
+			choice = input("\tWould you like to discard 1 of (Y)our resources, 1 of your (O)pponent's resources, or (B)oth?\n")
+		if choice in "BY":
+			print("\tChoose a resource to discard:")
+			list_hand(self.hand)
+			i = get_num("Which resource should be discarded?",len(self.hand))
+			card = self.hand[i]
+			self.hand.remove(card)
+			self.discard.append(card)
+			print(f"\"{card.name}\" resource has been discarded.")
+		elif choice in "BO":
+			print("\tChooase a Opponent's resource to discard:")
+			list_hand(Empire.hand)
+			i = get_num("Which resource should be discarded?", len(Empire.hand))
+			card = Empire.hand[i]
+			Empire.hand.remove(card)
+			Empire.discard.append(card)
+			print(f"Opponent's \"{card.name}\" resource has been discarded.")
+
+	def droids(self):
+		#TODO: finish StradegyCard.py before this can be made
+	

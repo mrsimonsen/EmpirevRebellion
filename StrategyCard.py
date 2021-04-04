@@ -1,4 +1,13 @@
-import random as r
+from random import choice
+class Card():
+	def __init__(self, name = None, d = "Empty Description"):
+		self.name = name
+		self.description = d
+
+	def __str__(self):
+		rep = f"Strataegy: {self.name}\n{self.description}"
+		return rep
+
 class Strategy():
 	# 5 Strategy cards per side
 	# all cards must be used before useing the same card again
@@ -11,18 +20,28 @@ class Strategy():
 		}
 
 	def __init__(self):
-		self.cards = list(Strategy.CARDS.keys())
-		self.strategy = (None,"Empty Description")
+		self.deck = []
+		for card in self.CARDS.keys():
+			self.deck.append(Card(card,CARDS[card]))
+		self.current = None
+		self.discard = []
+
+	def refill(self):
+		self.deck = self.discard[:]
+		self.discard.clear()				
 
 	def __str__(self):
-		count = len(self.cards)
-		if count > 1:
-			rep = f"{count} Avaliable Strategy Cards:\n"
+		l = len(self.deck)
+		if l > 1:
+			rep = f"{l} Avaliable Strategy Cards:\n"
 		else:
-			rep = f"{count} Avaliable Strategy Card:\n"
-		for i in range(count):
-			rep += f"\t{i + 1}: {self.cards[i]} - {Strategy.CARDS[self.cards[i]]}\n"
+			rep = f"{l} Avaliable Strategy Card:\n"
+		i = 1
+		for card in self.deck:
+			rep += f"{i} -- {card.name}:{card.description}\n"
+			i += 1
 		return rep
+
 
 	def choose(self, random = False):
 		if random:
@@ -49,15 +68,6 @@ class Strategy():
 		self.current()
 		print()
 
-	def remove(self, card):
-		self.cards.remove(card)
-		if not len(self.cards):
-			self.__init__()
-		
-	def current(self):
-		print(f"Current Strategy: {self.strategy[0]}")
-		print(self.strategy[1])
-		print()
 
 x = Strategy()
 x.choose(True)
