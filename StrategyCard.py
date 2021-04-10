@@ -1,4 +1,5 @@
-from random import choice
+import random as rand
+
 class Card():
 	def __init__(self, name = None, d = "Empty Description"):
 		self.name = name
@@ -22,12 +23,12 @@ class Strategy():
 	def __init__(self):
 		self.deck = []
 		for card in self.CARDS.keys():
-			self.deck.append(Card(card,CARDS[card]))
+			self.deck.append(Card(card,self.CARDS[card]))
 		self.current = None
 		self.discard = []
 
 	def refill(self):
-		self.deck = self.discard[:]
+		self.deck += self.discard[:]
 		self.discard.clear()				
 
 	def __str__(self):
@@ -41,33 +42,38 @@ class Strategy():
 			rep += f"{i} -- {card.name}:{card.description}\n"
 			i += 1
 		return rep
-
+	
+	def discard(self):
+		self.discard.append(self.current)
+		self.current = None
 
 	def choose(self, random = False):
+		#fill the deck if it's empty
+		if not len(self.deck):
+			self.refill()
+		#discard the current card
+		if self.current:
+			self.discard()
+		# randomly selected?
 		if random:
-			card = r.choice(self.cards)
+			self.current = self.deck.pop(rand.randrange(len(self.deck)))
 			print("Your Strategy Card will be chosen at random this round.")
-		else:
+		else:# then choose your card
 			print("Choose a Strategy Card for this round.\n")
 			print(self)
-			card = ''
-			while not card and not random:
+			while not self.current:
 				choice = input("What Strategy Card will you use this round?\n")
 				try:
 					i = int(choice)
 					if (i-1) < 0:
 						raise IndexError
-					card = self.cards[i-1]
+					self.current = self.deck.pop(i-1)
 				except ValueError:
 					print("That wasn't a number!")
 				except IndexError:
 					print("That wasn't a valid card number!")
-		self.remove(card)
-		self.strategy = (card, Strategy.CARDS[card])
-		print()
-		self.current()
-		print()
+		print(self.current)
 
-
-x = Strategy()
-x.choose(True)
+	#method of getting your card chosen for you
+	def chosen(self):
+		
