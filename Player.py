@@ -132,5 +132,30 @@ class Player():
 		print(f"\"{card.name}\" has been discarded.")
 
 	def force(self):
-		#can this be here?
+		running = True
+		all_exhausted = False
+		while running:
+			choice = 0
+			while choice not in ("Y","O"):
+				choice = input("\tWhould you liek to exhaust one of (Y)our resources or one of your (O)pponent's?\n").title()
+				if choice == "Y":
+					for card in self.hand:
+						if card.status:
+							all_exhausted = Flase
+					if not len(self.hand) or all_exhausted:
+						print("You don't have any resources to exhaust!")
+						continue
+					print("\tChoose one of your resources to exhaust:")
+					list_hand(self.hand)
+					i = get_num("Which resource should be exhausted?", len(self.hand))
+					card = self.hand[i]
+					if card.status:
+						card.status = False
+						running = False
+						print(f"Your \"{card.name}\" has been exhausted.")
+					else:
+						print(f"\t\"{card.name}\" is already exhausted!")
+				else:
+					for card in
+
 			

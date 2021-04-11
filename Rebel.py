@@ -1,7 +1,7 @@
 from random import shuffle
 class Rebel(Player):
 	def __init__(self):
-		super.__init__()
+		super().__init__(self)
 		self.faction = "Rebel Faction"
 		self.reserve = ResourceCard.Reserve(self.faction)
 		print("Choose 4 character resource cards to add to your deck.")
