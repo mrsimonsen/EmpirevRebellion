@@ -35,15 +35,15 @@ class Rebel():
 		running = True
 		while running:
 			try:
-				i = int(input(f"\t{question}\n")
+				i = int(input(f"\t{question}\n"))
 				if i < 1 and i > max:
 					raise IndexError
 				else:
 					return i-1
-				except IndexError:
-					print("\tThat isn't a valid card!")
-				except ValueError:
-					print("\tThat wasn't a number!")
+			except IndexError:
+				print("\tThat isn't a valid card!")
+			except ValueError:
+				print("\tThat wasn't a number!")
 
 	def add_character(self):
 		print("Avaliable characters to add:")
@@ -65,7 +65,7 @@ class Rebel():
 			self.influence = 0
 
 	def view_hand(self):
-		print(f"You currently have {len(self.hand) cards in play for a total value of {self.value}.")
+		print(f"You currently have {len(self.hand)} cards in play for a total value of {self.value}.")
 		for card in self.hand:
 			print(card)
 	
@@ -217,7 +217,7 @@ class Rebel():
 		choice = 0
 		while choice not in ("Y","O"):
 			choice = input("\tWould you like to Recon (Y)our resources or your (O)pponent's?\n").title()
-		if choice = "Y":
+		if choice == "Y":
 			if len(self.deck) < 2:
 				self.fill_deck()
 			cards = (self.deck.pop(),self.deck.pop())
@@ -249,7 +249,7 @@ class Rebel():
 			self.leia()
 		elif card.name == "Luke Skywalker":
 			self.luke()
-		elif card.name == "Obi-Wan Kenobi"
+		elif card.name == "Obi-Wan Kenobi":
 			self.kenobi()
 		elif card.name == "R2-D2 and C-3PO":
 			self.droids()
@@ -307,7 +307,7 @@ class Rebel():
 		else:
 			num = ("1st","2nd")
 			for n in num:
-				selecting = True:
+				selecting = True
 				while selecting:
 					print(f"\tChoose the {n} opponent resource to exhaust:")
 					list_hand(Empire.hand)
@@ -342,7 +342,7 @@ class Rebel():
 			if again == "N":
 				selecting = False
 			else:
-				if len(self.hand) > 0
+				if len(self.hand) > 0:
 					print(f"\tCurrently discarding {len(selection)} resources.")
 				else:
 					print("\tYou don't have any resources left!")
@@ -376,5 +376,6 @@ class Rebel():
 			print(f"Opponent's \"{card.name}\" resource has been discarded.")
 
 	def droids(self):
-		#TODO: finish StradegyCard.py before this can be made
-	
+		print("\tChoose a new Strategy Card for this round:")
+		self.strategy.choose()
+
