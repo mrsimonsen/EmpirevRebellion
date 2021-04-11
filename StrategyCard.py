@@ -25,13 +25,15 @@ class Strategy():
 		for card in self.CARDS.keys():
 			self.deck.append(Card(card,self.CARDS[card]))
 		self.current = None
-		self.discard = []
+		self.used = []
 
 	def refill(self):
-		self.deck += self.discard[:]
-		self.discard.clear()				
+		self.deck += self.used[:]
+		self.used.clear()				
 
 	def __str__(self):
+		if not len(self.deck):
+			self.refill()
 		l = len(self.deck)
 		if l > 1:
 			rep = f"{l} Avaliable Strategy Cards:\n"
@@ -44,7 +46,7 @@ class Strategy():
 		return rep
 	
 	def discard(self):
-		self.discard.append(self.current)
+		self.used.append(self.current)
 		self.current = None
 
 	def choose(self, random = False):
@@ -75,5 +77,21 @@ class Strategy():
 		print(self.current)
 
 	#method of getting your card chosen for you
-	def chosen(self):
-		
+	@staticmethod
+	def chosen(Other):
+		Other.discard()
+		print("Choose your opponent's Strategy Card.")
+		print(Other)
+		while not Other.current:
+			choice = input("What Strategy Card do you choose for your opponent?\n")
+			try:
+				i = int(choice)
+				if (i-1) < 0:
+					raise IndexError
+				Other.current = Other.deck.pop(i-1)
+			except ValueError:
+				print("That wasn't a number!")
+			except IndexError:
+				print("That wasn't a valid card number!")
+		print(f"{Other.current.name} has been chosen for your opponent.")
+
