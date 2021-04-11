@@ -91,8 +91,3 @@ class Reserve():
 			i += 1
 		return rep
 
-
-
-
-x = Reserve("Rebel Faction")
-print(x)
