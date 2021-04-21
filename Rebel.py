@@ -16,25 +16,25 @@ class Rebel(Player):
 			print("No characters are left in your reserve!")
 		else:
 			print(self.reserve)
-			i = get_num("What character resource do you want to add?",len(self.reserve))
+			i = self.get_num("What character resource do you want to add?",len(self.reserve))
 			card = self.reserve[i]
 			self.reserve.remove(card)
 			return card
 
 	def exhaust(self):
 		running = True
-		if have_ready(self.hand):
+		if self.have_ready(self.hand):
 			while running:
 				print("\tChoose a Rebellion resource to exhaust:")
-				list_hand(self.hand)
-				i = get_num("Which resource should be exhausted?", len(self.hand))
+				self.list_hand(self.hand)
+				i = self.get_num("Which resource should be exhausted?", len(self.hand))
 				card = self.hand[i]
 				if card.status:
 					card.status = False
 					running = False
 					print(f"Rebellion's \"{card.name}\" has been exhausted.")
 				else:
-					print(\t\"{card.name}\" is already exhausted, choose a different resource!")
+					print("\t\"{card.name}\" is already exhausted, choose a different resource!")
 		else:
 			print("They don't have any resources to exhaust!")
 
@@ -43,7 +43,7 @@ class Rebel(Player):
 		if len(self.hand):
 			print("\tChoose a Rebellion resource to discard:")
 			self.list_hand()
-			i = get_num("Which resource should be discarded?", len(self.hand))
+			i = self.get_num("Which resource should be discarded?", len(self.hand))
 			card = self.hand[i]
 			self.discard_pile.append(card)
 			self.hand.remove(card)
@@ -58,7 +58,7 @@ class Rebel(Player):
 		cards = (self.deck.pop(),self.deck.pop())
 		print(f"\tChoose a resource to keep and a resource to discard for the Rebellion:")
 		self.list_hand(cards)
-		i = get_num("Which resource should be kept?",2)
+		i = self.get_num("Which resource should be kept?",2)
 		self.deck.append(cards[i])
 		self.discard_pile.append(cards[int(not i)])
 		print("\"{self.deck[-1].name}\" kept and \"{self.discard_pile[-1].name}\" discarded.")
@@ -88,7 +88,7 @@ class Rebel(Player):
 	def kenobi(self):
 		print("\tChoose a resource card from your discard pile to play:")
 		self.list_hand(self.discard_pile)
-		i = get_num("Which resource would you like to play?",len(self.discard_pile))
+		i = self.get_num("Which resource would you like to play?",len(self.discard_pile))
 		card = self.discard_pile[i]
 		card.status = True
 		self.hand.append(card)
