@@ -161,10 +161,14 @@ class Empire(Player):
 		elif c == 'r' and not len(Rebel.hand):
 			print("The Rebellion doesn't have any resources to exhaust!")
 		elif c == 'e' and not len(self.hand):
-			print("The Empire doesn't have nay resources to exhaust!")
+			print("The Empire doesn't have any resources to exhaust!")
 			
 
 	def vader(self:
+		c = input("Would you like to discard an exhausted (E)mpire resource or (R)ebellion resource?\n").lower()
+		if c == 'r':
+			
+
 	def emperor(self):
 	def veers(self):
 	def tarkin(self):
