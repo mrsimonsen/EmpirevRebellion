@@ -166,8 +166,30 @@ class Empire(Player):
 
 	def vader(self:
 		c = input("Would you like to discard an exhausted (E)mpire resource or (R)ebellion resource?\n").lower()
+		exhausted_cards = []
 		if c == 'r':
-			
+			for card in Rebel.hand:
+				if not card.status:
+					exhausted_cards.append(card)
+			if len(exhausted_cards):
+				print("\tWhich Rebellion exhaused resourse whould you like to discard?")
+				self.list_hand(exhausted_cards)
+				i = self.get_num("Which Rebel resourse should be discarded?", len(exhausted_cards))
+				card = exhaused_card[i]
+				if card.name not in ("Recon","Military","The Force","Diplomacy"):
+					Rebel.hand.remove(card)
+					Rebel.reserve.append(card)
+					print(f"Exhausted {card.name} has been returned to the Rebellion's reserve.")
+				else:
+					Rebel.hand.remove(card)
+					Rebel.discard.append(card)
+					print(f"Rebellion's exhausted {card.name} has been discarded.")
+			else:
+				print("The Rebellion doesn't have any exhaused resources!")
+		elif c == 'e':
+			# if there are exhaused resourses
+				#list and select to discard
+			else("The Empire doesn't have any exhaused resources!")
 
 	def emperor(self):
 	def veers(self):
