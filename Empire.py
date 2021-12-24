@@ -208,8 +208,22 @@ class Empire(Player):
 
 	def emperor(self):
 		print("The Rebellion must choose a new strategy card.")
-		Rebel.
+		Rebel.strategy.discard()
+		Rebel.strategy.choose()
+
 	def veers(self):
+		#discard top resource card
+		# discard all opponent resource whose value is less
+
 	def tarkin(self):
+		#opponent discards 2 influence tokens
 	def ig(self):
+		#choose a resource deck to search
+		#choose 2 CARDS
+		#discard one
+		#shuffle deck
+		#place second card on top
 	def jabba(self):
+		#view top card of resource yoru deck
+		#choose to discard 1 resource card (and/or)
+		#choose to play the top resource card 
