@@ -20,7 +20,7 @@ class Empire(Player):
 			card = self.reserve[i]
 			self.reserve.remove(card)
 			return card
-	
+
 	def exhaust(self):
 		running = True
 		if self.have_ready(self.hand):
@@ -37,7 +37,7 @@ class Empire(Player):
 					print("\t\"{card.name}\" is already exhausted, choose a different resource!")
 		else:
 			print("They don't have any resources to exhaust!")
-	
+
 	def discard(self):
 		running = True
 		if len(self.hand):
@@ -89,7 +89,7 @@ class Empire(Player):
 			print(f"\t\tEmpire    - no discarded resources!")
 			E = False
 		if len(Rebel.discard_pile):
-			print(f"\t\t(R)ebellion - {Rebel.discard_pile[-1]")
+			print(f"\t\t(R)ebellion - {Rebel.discard_pile[-1]}")
 			R = True
 		else:
 			print(f"\t\tRebellion - no discarded resources!")
@@ -162,9 +162,9 @@ class Empire(Player):
 			print("The Rebellion doesn't have any resources to exhaust!")
 		elif c == 'e' and not len(self.hand):
 			print("The Empire doesn't have any resources to exhaust!")
-			
 
-	def vader(self:
+
+	def vader(self):
 		c = input("Would you like to discard an exhausted (E)mpire resource or (R)ebellion resource?\n").lower()
 		exhausted_cards = []
 		if c == 'r':
@@ -175,7 +175,7 @@ class Empire(Player):
 				print("\tWhich Rebellion exhaused resourse whould you like to discard?")
 				self.list_hand(exhausted_cards)
 				i = self.get_num("Which Rebel resourse should be discarded?", len(exhausted_cards))
-				card = exhaused_card[i]
+				card = exhausted_cards[i]
 				if card.name not in ("Recon","Military","The Force","Diplomacy"):
 					Rebel.hand.remove(card)
 					Rebel.reserve.append(card)
@@ -187,17 +187,27 @@ class Empire(Player):
 			else:
 				print("The Rebellion doesn't have any exhaused resources!")
 		elif c == 'e':
-			# if there are exhaused resourses
-				#list and select to discard
-			else("The Empire doesn't have any exhaused resources!")
+			for card in self.hand:
+				if not card.status:
+					exhausted_cards.append(card)
+			if len(exhausted_cards):
+				print("\tWhich Imperial exhaused resourse whould you like to discard?")
+				self.list_hand(exhausted_cards)
+				i = self.get_num("Which Empire resourse shoudl be discarded?", len(exhausted_cards))
+				card = exhausted_cards[i]
+				if card.name not in ("Recon", "Military", "The Force", "Diplomacy"):
+					self.hand.remove(card)
+					self.reserve.append(card)
+					print(f"Exhausted {card.name} has been returned to the Empire's reserve.")
+				else:
+					self.hand.remove(card)
+					self.discard.append(card)
+					print(f"Empire's exhausted {card.name} has been discarded.")
+			else:
+				print("The Empire doesn't have any exhaused resources!")
 
 	def emperor(self):
 	def veers(self):
 	def tarkin(self):
 	def ig(self):
 	def jabba(self):
-
-			
-
-
-		
