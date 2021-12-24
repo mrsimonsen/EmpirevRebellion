@@ -5,21 +5,21 @@ class Player():
 		self.influence = 2
 		self.discard_pile = []
 		self.hand = []
-	
+
 	@property
 	def value(self):
 		value = 0
 		for card in self.hand:
 			value += card.value
 		return value
-	
+
 	def list_hand(self):
 		i = 1
 		for card in self.hand:
 			print(f"\t{i} -- {card.name}:{card.value}")
 			print(f"\t\t{card.power}")
 			print(f"\t\tExhausted: {not card.status}")
-	
+
 	@staticmethod
 	def get_num(question, max):
 		running = True
@@ -42,7 +42,7 @@ class Player():
 			if card.status:
 				all_exhausted = False
 		return not all_exhausted
-	
+
 	@staticmethod
 	def choose(question):
 		choice = None
@@ -57,12 +57,12 @@ class Player():
 		self.influence -= num
 		if self.influence < 0:
 			self.influence = 0
-	
+
 	def view_hand(self):
 		print("You currently have {len(self.hand)} card in play for the total value of {self.value}.")
 		for card in self.hand:
 			print(card)
-	
+
 	def fill_deck(self):
 		print("\tYou're out of resource cards! Shuffeling your discard pile into your deck.")
 		self.hand = self.discard_pile[:]
@@ -161,11 +161,10 @@ class Player():
 			Empire.discard()
 		elif self.faction == "Imperial Faction":
 			Rebel.discard()
-	
+
 	def recon(self):
 		choice = self.choose("Would you like to choose the (R)ebellion's next resource or the (E)mpire's?")
 		if choice == 'r':
 			Rebel.r_deck()
 		elif choice == 'e':
 			Empire.r_deck()
-

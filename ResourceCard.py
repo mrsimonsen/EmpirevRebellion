@@ -14,7 +14,7 @@ class Card():
 			return self.ready_value
 		else:
 			return self.exaust_value
-	
+
 	def __str__(self):
 		rep = f"Card: {self.name}\nResource Value: "
 		if self.status:
@@ -62,7 +62,7 @@ class Reserve():
 		"IG-88": "Search either resource deck for 2 cards. Then discard 1 and place the other on top of that deck after shuffling it.",
 		"Jabba the Hutt": "Look at the top card of your resource deck. You may discard 1 of your resource cards and/or play the top resource card of your deck."
 		}
-	
+
 	def __init__(self, faction = "Imperial Faction"):
 		self.reserve = []
 		self.faction = faction
@@ -82,7 +82,7 @@ class Reserve():
 				else:
 					x = characters[0]
 				self.reserve.append(Card(x,6,1,self.EMPIRE_CHARACTERS[x]))
-		
+
 	def __str__(self):
 		rep = "Character card reserve:\n"
 		i = 1
@@ -90,4 +90,3 @@ class Reserve():
 			rep += f"{i} -- {card.name}\n\t{card.power}\n"
 			i += 1
 		return rep
-

@@ -16,7 +16,7 @@ class Card():
 		rep += f"Influence Value: {self.influence}\n"
 		rep += f"Effect: {self.effect}"
 		return rep
-	
+
 class Event():
 	# 24 event cards
 	def __init__(self):
@@ -47,7 +47,7 @@ class Event():
 		self.add("Ultimate Power in the Universe",3,7,2,1,"The player who wins this even retrieves all of their previously chosen strategy cards.")
 		r.shuffle(self.deck)
 		self.current = None
-			
+
 	def add(self, *args):
 		if len(args) < 6:
 			name, cap, val, pts, inf = args
@@ -55,10 +55,10 @@ class Event():
 		else:
 			name, cap, val, pts, inf, eff = args
 		self.deck.append(Card(name, cap, val, pts, inf, eff))
-	
+
 	def __str__(self):
 		return self.current.Card__str__()
-		
+
 	def get_event(self):
 		self.current = self.deck.pop(0)
 		print(self.current)

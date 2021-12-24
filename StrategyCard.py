@@ -29,7 +29,7 @@ class Strategy():
 
 	def refill(self):
 		self.deck += self.used[:]
-		self.used.clear()				
+		self.used.clear()
 
 	def __str__(self):
 		if not len(self.deck):
@@ -44,7 +44,7 @@ class Strategy():
 			rep += f"{i} -- {card.name}:{card.description}\n"
 			i += 1
 		return rep
-	
+
 	def discard(self):
 		self.used.append(self.current)
 		self.current = None
@@ -94,4 +94,3 @@ class Strategy():
 			except IndexError:
 				print("That wasn't a valid card number!")
 		print(f"{Other.current.name} has been chosen for your opponent.")
-

@@ -51,7 +51,7 @@ class Rebel(Player):
 
 		else:
 			print("The Rebellion doesn't have any resources left to discard!")
-	
+
 	def r_deck(self):
 		if len(self.deck) < 2:
 			self.fill_deck()
@@ -197,4 +197,3 @@ class Rebel(Player):
 	def droids(self):
 		print("\tChoose a new Strategy Card for this round:")
 		self.strategy.choose()
-
