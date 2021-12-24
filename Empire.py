@@ -207,6 +207,8 @@ class Empire(Player):
 				print("The Empire doesn't have any exhaused resources!")
 
 	def emperor(self):
+		print("The Rebellion must choose a new strategy card.")
+		Rebel.
 	def veers(self):
 	def tarkin(self):
 	def ig(self):
